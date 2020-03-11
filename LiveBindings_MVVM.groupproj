@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{7C651FE4-3FFF-4E7B-9F1F-302E53394EA5}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="VCL\testLiveBinding.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FMX\testLiveBindingFmx.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="testLiveBinding">
+        <MSBuild Projects="VCL\testLiveBinding.dproj"/>
+    </Target>
+    <Target Name="testLiveBinding:Clean">
+        <MSBuild Projects="VCL\testLiveBinding.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="testLiveBinding:Make">
+        <MSBuild Projects="VCL\testLiveBinding.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="testLiveBindingFmx">
+        <MSBuild Projects="FMX\testLiveBindingFmx.dproj"/>
+    </Target>
+    <Target Name="testLiveBindingFmx:Clean">
+        <MSBuild Projects="FMX\testLiveBindingFmx.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="testLiveBindingFmx:Make">
+        <MSBuild Projects="FMX\testLiveBindingFmx.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="testLiveBinding;testLiveBindingFmx"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="testLiveBinding:Clean;testLiveBindingFmx:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="testLiveBinding:Make;testLiveBindingFmx:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
